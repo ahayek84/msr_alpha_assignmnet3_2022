@@ -16,7 +16,7 @@ def read_data():
     files = ["mongodb","react","socketio"]
     frames = []
     for file in files:
-        df = pd.read_csv(f"../data/{file}.csv",sep=";",encoding="utf-8")
+        df = pd.read_csv(f"./data/{file}.csv",sep=";",encoding="utf-8")
         df["source"] = [f"{file}" for _ in range(len(df))]
         frames.append(df)
     return pd.concat(frames)
@@ -87,13 +87,13 @@ def scaler_fit(X):
     return scaler
 
 
-def create_dataset(source="all", use_smote=True, combine_labels=False):
+def create_dataset(source="all", use_smote=True,synthetic_method="smote", combine_labels=False):
     all_data = data_preprocessing(combine_labels, source=source)
     X = all_data.loc[:,all_data.columns != "survey"]
     y = [x[0] for x in all_data[["survey"]].values]
     X_train, X_test, y_train, y_test = split(X,y) 
     if use_smote:
-        X_train,y_train = MLSMOTE(X_train, y_train)     #Applying MLSMOTE to augment the dataframe 
+        X_train,y_train = MLSMOTE(X_train, y_train,synthetic_method=synthetic_method)     #Applying MLSMOTE to augment the dataframe 
     test_source = X_test[["source"]].copy()
     scaler = scaler_fit(X_train)
     X_train = scaler.transform(X_train)
