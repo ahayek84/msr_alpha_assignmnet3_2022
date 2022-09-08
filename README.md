@@ -2,7 +2,6 @@
 
 **Student names**:
 - Abdelrahman ALHayek
-- Jesmin Aktar Mousumy
 - AmeerAli Khan 
 
 ### Repository Instructions
