@@ -6,7 +6,7 @@ ABI
 import pandas as pd
 import numpy as np
 from utils import get_newlabel
-from mlsmote import MLSMOTE
+from oversampling_technique import get_oversampled_data
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 import warnings
@@ -87,13 +87,13 @@ def scaler_fit(X):
     return scaler
 
 
-def create_dataset(source="all", use_smote=True,synthetic_method="smote", combine_labels=False):
+def create_dataset(source="all", use_smote=True,synthetic_method="prowsyn", combine_labels=False):
     all_data = data_preprocessing(combine_labels, source=source)
     X = all_data.loc[:,all_data.columns != "survey"]
     y = [x[0] for x in all_data[["survey"]].values]
     X_train, X_test, y_train, y_test = split(X,y) 
     if use_smote:
-        X_train,y_train = MLSMOTE(X_train, y_train,synthetic_method=synthetic_method)     #Applying MLSMOTE to augment the dataframe 
+        X_train,y_train = get_oversampled_data(X_train, y_train,synthetic_method=synthetic_method)     #Applying MLSMOTE to augment the dataframe 
     test_source = X_test[["source"]].copy()
     scaler = scaler_fit(X_train)
     X_train = scaler.transform(X_train)
@@ -102,4 +102,4 @@ def create_dataset(source="all", use_smote=True,synthetic_method="smote", combin
 
 
 if __name__ == "__main__":
-    X_train, X_test, y_train, y_test, test_source = create_dataset(source="react",use_smote=False)
+    X_train, X_test, y_train, y_test, test_source = create_dataset(source="react",use_smote=False,synthetic_method="smote")
