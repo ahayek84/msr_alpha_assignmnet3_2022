@@ -46,9 +46,10 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser("Train a Random Forest and SVC model")
     parser.add_argument("--model_type", type=str, default="random_forest", help="Model type to fine-tune.")
     parser.add_argument("--combine_labels", choices=["true","yes","false","no"],type=str.lower,default="false", help="Combine Novice and expert labels")
+    parser.add_argument("--synthetic_method",default="prowsyn", help="Oversampling technique.")
     args = parser.parse_args()
     
     combine_labels = True if args.combine_labels.lower() in ["true","yes"] else False
-    data = create_dataset(use_smote=True,synthetic_method="prowsyn",combine_labels=combine_labels)
+    data = create_dataset(use_smote=True,synthetic_method=args.synthetic_method,combine_labels=combine_labels)
     model = get_model(args.model_type,combine_labels)
     train_eval(data, model)

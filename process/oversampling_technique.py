@@ -3,10 +3,13 @@
 import pandas as pd
 
 
-def MLSMOTE(X_train, y_train,synthetic_balance_proportion=0.3,synthetic_method="smote",n_neighbors=3):
+def get_oversampled_data(X_train, y_train,synthetic_balance_proportion=0.3,synthetic_method="smote",n_neighbors=3):
     """
     Smote using the parameter given by author
     """
+    print("="*80)
+    print(f'Using oversampling technique {synthetic_method}')
+    print("="*80)
     import smote_variants as svs
     cols = X_train.columns
     if synthetic_method == 'adasyn':
@@ -19,8 +22,10 @@ def MLSMOTE(X_train, y_train,synthetic_balance_proportion=0.3,synthetic_method="
             oversampler = svs.ProWSyn(proportion=synthetic_balance_proportion)  
     elif synthetic_method == 'lee':
             oversampler = svs.Lee(proportion=synthetic_balance_proportion)      
-    else:
+    elif synthetic_method == "smote":
         oversampler = svs.SMOTE(random_state=0 , proportion=synthetic_balance_proportion,n_neighbors=n_neighbors)
+    else:
+        raise Exception
     oversampler = svs.MulticlassOversampling(oversampler)
     
     X_train, y_train = oversampler.sample(X_train, y_train)

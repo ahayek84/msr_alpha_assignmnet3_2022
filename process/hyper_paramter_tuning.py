@@ -51,9 +51,10 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser("Fine-tuning for Random Forest and SVC using Grid search")
     parser.add_argument("--model_type", type=str, default="random_forest", help="Model type to fine-tune.")
     parser.add_argument("--combine_labels", choices=["true","yes","false","no"],type=str.lower,default="true", help="Combine Novice and expert labels")
+    parser.add_argument("--synthetic_method",default="prowsyn", help="Oversampling technique.")
     args = parser.parse_args()
     
     combine_labels = True if args.combine_labels.lower() in ["true","yes"] else False
-    X_train, X_test, y_train, y_test, test_source = create_dataset(combine_labels=combine_labels)
+    X_train, X_test, y_train, y_test, test_source = create_dataset(combine_labels=combine_labels,synthetic_method=args.synthetic_method)
     parameters, model = get_params_model(args.model_type)
     search_best_params(X_train,y_train,X_test,y_test,parameters, model)
