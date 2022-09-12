@@ -36,25 +36,11 @@
 
 ### Please find the evaluation score below for each Models and combine-labels Type
 
+`Analysis with combine labels (3 Classes)`
+![analysis_combinelabels](https://user-images.githubusercontent.com/13449847/189664739-c93d7fc7-e868-4769-9251-35670815ea1a.png)
 
-`Random Forest with combine labels (3 Classes)`
-
-
-![rf_combinelabels](https://user-images.githubusercontent.com/13449847/181070634-2cfc3ced-f04d-44f3-8cbf-e0618001d7e6.png)
-
-
-`Random Forest with out combine labels (5 Classes)`
-
-
-![rf_nocombinelabels](https://user-images.githubusercontent.com/13449847/181072222-7dbbcd91-8cdf-49a9-a192-a542b4e83f12.png)
-
-
-`SVC with combine labels (3 Classes)`
-![svc_combinelabels](https://user-images.githubusercontent.com/13449847/181070704-ef3b5ec6-462e-4d73-8b56-f005bcf1d706.png)
-
-
-`SVC without combine labels (5 Classes)`
-![svc_nocombinelabels](https://user-images.githubusercontent.com/13449847/181070725-a8c9ef8e-e99f-4858-a457-46d46b80f79b.png)
+`Analysis without combine labels (5 Classes)`
+![analysis_nocombinelabels](https://user-images.githubusercontent.com/13449847/189664758-c377b25d-86e9-4131-9e3a-840027e2557c.png)
 
 ### Objective of reproduction with subsections as follows:
 Description-This paper extends the expertise identification approaches, to the context of third-party software components (external libraries), using a supervised and unsupervised learning.
